@@ -8,7 +8,7 @@ A web-based tool to run and evaluate the [HC-MPNN](https://github.com/HxyScotthu
 
 - Run HC-MPNN on supported datasets (e.g., `FB-AUTO`, `WP-IND`)
 - Configure number of epochs and evaluation type (`Raw`, `Filtered`, `Both`)
-- Track and download full model summaries as `.txt` or `.pdf`
+- Track and download full model summaries as `.pdf`
 - Auto-generates system runtime metadata (e.g., hostname, Python version)
 - Bootstrap-powered responsive UI with loading animation
 - Optional notes input for each run
