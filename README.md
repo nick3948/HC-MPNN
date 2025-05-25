@@ -18,8 +18,9 @@ A web-based tool to run and evaluate the [HC-MPNN](https://github.com/HxyScotthu
 
 ## 📸 Screenshot
 
-![image](https://github.com/user-attachments/assets/c4b7cad4-870b-4a72-8c76-1248d5457999)
+![image](https://github.com/user-attachments/assets/61f3f999-e7e6-4680-915b-d245c562f75b)
 
+![image](https://github.com/user-attachments/assets/c36cb5bf-83cd-409e-9406-adbb69a9cc1f)
 
 ---
 
