@@ -5,10 +5,25 @@
 <head>
     <title>HC-MPNN Runner</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body class="container py-4">
     <h1>Run HC-MPNN Model</h1>
+    <div class="row align-items-center mb-4">
+        <div class="col-md-6 text-center">
+            <img src="{% static 'assets/Hypergraph.svg' %}" alt="Hypergraph Visualization" style="max-width: 100%;">
+        </div>
+        <div class="col-md-6">
+            <p>
+                <strong>What is a Hypergraph?</strong><br>
+                A hypergraph is a generalization of a traditional graph where an edge (called a hyperedge) can connect
+                any number of nodes.
+                Hypergraphs are well-suited for representing complex relationships in many domains, including relational
+                databases, biological networks, and recommendation systems.
+            </p>
+        </div>
+    </div>
     <form method="post" class="mb-4">
         {% csrf_token %}
         {{ form.as_p }}
@@ -22,9 +37,11 @@
     </div>
 
     {% if result %}
-    <h3>Output:</h3>
-    <pre class="bg-light p-3 rounded">{{ result }}</pre>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = new bootstrap.Modal(document.getElementById('resultModal'));
+            modal.show();
+        });
         function downloadTextFile(defaultFilename, content) {
             const filename = prompt("Enter a filename:", defaultFilename);
             if (filename) {
@@ -36,18 +53,50 @@
             }
         }
     </script>
-
-    <div class="d-flex gap-2 mt-3">
-        <form method="get" action="{% url 'download_pdf' %}" style="display:inline;">
-            <button type="submit" class="btn btn-outline-secondary">Download .pdf Summary</button>
-        </form>
-    </div>
     {% endif %}
+
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultModalLabel">HC-MPNN Output</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <pre class="bg-light p-3 rounded">{{ result }}</pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form method="get" action="{% url 'download_pdf' %}" class="d-inline">
+                        <button type="submit" class="btn btn-outline-secondary">Download .pdf Summary</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         document.querySelector("form").addEventListener("submit", function () {
             document.getElementById("loading").style.display = "block";
         });
     </script>
+    <script>
+        document.querySelector("form").addEventListener("submit", function () {
+            document.getElementById("loading").style.display = "block";
+            const toast = new bootstrap.Toast(document.getElementById('runToast'));
+            toast.show();
+        });
+    </script>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="runToast" class="toast align-items-center text-white bg-info border-0" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">
+                    ⏳ Running HC-MPNN... Please wait.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
