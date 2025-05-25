@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <title>HC-MPNN Runner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container py-4">
+    <h1>Run HC-MPNN Model</h1>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Run Model</button>
+    </form>
+    <div id="loading" class="mt-2" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <span>Running model, please wait...</span>
+    </div>
+
+    {% if result %}
+    <h3>Output:</h3>
+    <pre class="bg-light p-3 rounded">{{ result }}</pre>
+    <script>
+        function downloadTextFile(defaultFilename, content) {
+            const filename = prompt("Enter a filename:", defaultFilename);
+            if (filename) {
+                const blob = new Blob([content], { type: "text/plain" });
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = filename.endsWith('.txt') ? filename : filename + ".txt";
+                a.click();
+            }
+        }
+    </script>
+
+    <div class="d-flex gap-2 mt-3">
+        <form method="get" action="{% url 'download_pdf' %}" style="display:inline;">
+            <button type="submit" class="btn btn-outline-secondary">Download .pdf Summary</button>
+        </form>
+    </div>
+    {% endif %}
+    <script>
+        document.querySelector("form").addEventListener("submit", function () {
+            document.getElementById("loading").style.display = "block";
+        });
+    </script>
+</body>
+
+</html>
