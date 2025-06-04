@@ -40,26 +40,30 @@ pip install -r requirements.txt
 
 1. Clone the repo:
 ```bash
-git clone https://github.com/your-username/HC-MPNN-UI.git
-cd HC-MPNN-UI
+git clone https://github.com/your-username/HC-MPNN.git
+cd HC-MPNN
 ```
 2. Create and activate a virtual environment:
 ```bash
 python3 -m venv hc-mpnn-env
 source hc-mpnn-env/bin/activate
 ```
-3. Install the required packages:
+3. Get into UI folder:
+```
+cd hc_ui
+```
+5. Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Apply database migrations:
+5. Apply database migrations:
 ```bash
 python manage.py migrate
 ```
 
-5. Start the Django development server:
+6. Start the Django development server:
 ```bash
 python manage.py runserver
 ```
