@@ -48,14 +48,16 @@ cd HC-MPNN
 python3 -m venv hc-mpnn-env
 source hc-mpnn-env/bin/activate
 ```
-3. Get into UI folder:
-```
-cd hc_ui
-```
-5. Install the required packages:
+
+3. Install the required packages:
 
 ```bash
 pip install -r requirements.txt
+```
+
+4. Get into UI folder:
+```
+cd hc_ui
 ```
 
 5. Apply database migrations:
@@ -68,7 +70,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-6. Open the app in your browser:
+7. Open the app in your browser:
 ```
 http://127.0.0.1:8000/
 ```
